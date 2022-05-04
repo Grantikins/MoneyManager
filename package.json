@@ -7,9 +7,14 @@
     "start": "npm install && nodemon app"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "ejs": "^3.1.7",
     "express": "*",
-    "plotly.js-dist-min": "^2.11.1"
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.2",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "uuid": "^8.3.2"
   },
   "author": "Grant Randell",
   "devDependencies": {

@@ -1,19 +1,19 @@
 const express = require('express')
 const app = express()
+const port = 3000
+const userRoutes = require("./routes/routes")
+const bodyParser = require("body-parser")
+const session = require("express-session")
+const passport = require("./middlewares/passport-config")
+const flash = require("express-flash")
 
 app.set("view engine", "ejs")
-app.use(express.static(__dirname + "/public"))
+app.use(express.static("public"))
+app.use(bodyParser.urlencoded({extended: false}))
+app.use( session( {secret: "secret-word", resave: false, saveUninitialized: true} ) )
+app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
+app.use("/", userRoutes)
 
-app.get("/", (request, response) => {
-    response.render("login")
-})
-
-app.get("/login", (request, response) => {
-    response.render("login")
-})
-
-app.get("/register", (request, response) => {
-    response.render("register")
-})
-
-app.listen(3000)
+app.listen(port, () => console.log(`listening on port ... ${port}`))

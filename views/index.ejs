@@ -1,13 +1,6 @@
 <html>
-    <head>
-        <script src="https://cdn.plot.ly/plotly-2.11.1.min.js"></script>
 
-        <link rel="stylesheet" href="styles/bootstrap-icons.css">
-        <link rel="stylesheet" href="styles/bootstrap.min.css">
-        <link rel="stylesheet" href="styles/style.css">
-
-        <title>Project</title>
-    </head>
+    <%- include("./partials/head.ejs") %>
 
     <body class="container">
         <nav class="navbar navbar-expand-lg">
@@ -42,7 +35,11 @@
         </ul>
 
         <button id="addTransaction">Add transaction</button>
+
+        <form action = "/logout" method = "POST" >
+            <button type = "submit" > Logout </button>
+        </form>
     </body>
 
-    <script src="scripts/index.js"></script>
+    <script src="../scripts/index.js"></script>
 </html>

@@ -6,19 +6,26 @@
 
         <title>Project</title>
     </head>
-    <body  class="container">
+    <body class="container d-flex flex-column align-items-center">
         <h1>Login</h1>
-        <form>
-            <div>
+
+        <% if(messages.error) { %>
+            <%= messages.error %>
+        <% } %>
+        
+        <form action="/login" method="POST">
+            <div class="d-flex justify-content-sm-between">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <div>
+            <div class="d-flex justify-content-sm-between">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Login</button>
+            <div class="d-flex justify-content-sm-between">
+                <button type="submit" class="btn btn-success">Login</button>
+                <a href="/register" class="logReg-anchor">Register</a>
+            </div>
         </form>
-        <a href="/register">Register</a>
     </body>
 </html>
