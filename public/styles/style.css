@@ -1,8 +1,11 @@
-#addTransaction{
-    flex-direction: column;
-    align-self: flex-end
-}
-
 .logReg-anchor{
     margin-top: 3px;
+}
+
+.myForm{
+    min-width: 280px;
+}
+
+.log-reg-container{
+    margin-top: 20%
 }

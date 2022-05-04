@@ -1,28 +1,30 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles/bootstrap-icons.css" type="text/css">
-        <link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="styles/style.css" type="text/css">
+    
+    <%- include("./partials/head.ejs") %>
 
-        <title>Project</title>
-    </head>
-    <body class="container">
-        <h1>Register</h1>
-        <form action="/register" method="POST">
-            <div>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Register</button>
-        </form>
-        <a href="/login">Login</a>
+    <body class="container d-flex flex-column align-items-center">
+       
+        <div class="log-reg-container">
+            <h1>Register</h1>
+            <form action="/register" method="POST" class="myForm">
+                <div class="d-flex justify-content-sm-between">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="d-flex justify-content-sm-between">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="d-flex justify-content-sm-between">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="d-flex justify-content-sm-between">
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <a href="/login" class="logReg-anchor">Login</a>
+                </div>
+            </form>
+        </div>
+        
     </body>
 </html>

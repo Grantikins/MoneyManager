@@ -22,3 +22,5 @@ Plotly.newPlot( pi, [{
     labels: categoryLabelData,
     type: "pie"
 }], plotLayout)
+
+//groceries, car, house/residence, food, entertainment, shopping, insurance
