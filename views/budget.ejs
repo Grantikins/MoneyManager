@@ -1,0 +1,48 @@
+<html>
+
+    <%- include("./partials/head.ejs") %>
+    
+    <body>
+
+        <%- include("./partials/nav.ejs") %>
+
+        <div class="container individual-budget">
+            <h6> <%= budget.category %> Budget</h6> <!-- Make delete button work -->
+            <%
+                var percent = budget.currentAmount / budget.budgetLimit * 100
+            %>
+            <div class="budget">
+                <div class="progress-bar" data-label="<%=budget.currentAmount%> / <%=budget.budgetLimit%>" style="--width: <%=percent%>" id="p"></div>
+                <button class="trash-button budget-delete-button" onclick="deleteBudget()">Delete</button>
+            </div>
+        
+            <% var bJSON = JSON.stringify(budget) %>
+        
+        </div>
+        
+        <script>
+        
+            // make this work!
+        
+            async function deleteBudget(){
+                var bString = `<%= bJSON %>`
+                bString = bString.replaceAll("&#34;", `"`)
+                const bData = JSON.parse(bString)
+                console.log(bData)
+        
+                await fetch(`http://localhost:3000/api/user/data/budget/${bData._id}`, {
+                    method: "DELETE",
+                    redirect: "follow"
+                }).then(response => {
+                    if(response.redirected){
+                        window.location.href = response.url
+                    }
+                })
+        
+                console.log("deleted ", bData._id)
+            }
+        </script>
+
+    </body>
+
+</html>

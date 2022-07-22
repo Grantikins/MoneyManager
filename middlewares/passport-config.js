@@ -1,11 +1,11 @@
 const { Strategy } = require("passport-local")
 const passport = require("passport")
-const users = require("../models/users")
+const User = require("../models/user")
 const bcrypt = require("bcrypt")
 
 async function authenticateUser(email, password, done){
-    const user = users.findUser("email", email)
-    if(user === undefined){
+    const user = await User.findOne({email: email})
+    if(user === null){
         console.log("no user with that email")
         return done(null, false, {message: "No user with that email."})
     }
@@ -20,11 +20,15 @@ async function authenticateUser(email, password, done){
 }
 
 function setupPassport(){
-    const formNames = {usernameField: "email", paswordField: "password"}
+    const formNames = {usernameField: "email", passwordField: "password"}
     const localStrategy = new Strategy(formNames, authenticateUser)
     passport.use(localStrategy)
     passport.serializeUser( (user, done) => done(null, user.id) )
-    passport.deserializeUser( (id, done) => done(null, users.findUser("id", id)) )
+    passport.deserializeUser( (id, done) => {
+        User.findById(id, (err, user) => {
+            done(err, user)
+        })
+    } )
 }
 
 setupPassport()

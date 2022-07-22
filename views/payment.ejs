@@ -1,0 +1,52 @@
+<html>
+
+    <%- include("./partials/head.ejs") %>
+
+    <body class="">
+
+        <%- include("./partials/nav.ejs") %>
+
+        <div class="container">
+            <% console.log(transaction.amount) %>
+            <h4 class="t-form-title"> $<%= transaction.amount %> - <%= transaction.category %> </h4>
+
+            <% 
+                date = transaction.dateCreated.toString().split(" ")
+                day = date[0]
+                month = date[1]
+                dayNum = date[2]
+                year = date[3]
+            %>
+
+            <div class="t-info-ps">
+                <p>Payment amount: $<%= transaction.amount %></p>
+                <p>Category: <%= transaction.category %></p>
+                <p>Date: <%= day %> <%= month %> <%= dayNum %>, <%= year %></p>
+            </div>
+
+            <button class="trash-button" onclick="deleteTransaction()">Delete</button>
+
+        </div>
+
+        <% var tJSON = JSON.stringify(transaction) %>
+
+        <script>
+            var tString = `<%= tJSON %>`
+            tString = tString.replaceAll("&#34;", `"`)
+            const tData = JSON.parse(tString)
+            
+            async function deleteTransaction(){
+                await fetch(`http://localhost:3000/api/user/data/transaction/${tData._id}`, {
+                    method: "DELETE",
+                    redirect: "follow"
+                }).then(response => {
+                    if(response.redirected){
+                        window.location.href = response.url
+                    }
+                })
+            }
+        </script>
+
+    </body>
+
+</html>

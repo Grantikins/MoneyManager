@@ -1,0 +1,16 @@
+<li class="list-group-item">
+    <div class="t-info">
+        <div>
+            <%  
+                if(date > Date.now()) var upcomingString = " - Upcoming"
+                date = date.toString()
+                words = date.split(" ")
+                date = "" + words[0] + " " + words[1] + " " + words[2] + ", " + words[3]
+            %>
+            <h6> 
+                <a href="/<%=id%>" class="view-payment-a"><%= category %></a> <span class="upcoming"> <%= upcomingString %> </span>
+            </h6>
+            $<%= amount %> <%= date %>
+        </div> 
+    </div>
+</li>

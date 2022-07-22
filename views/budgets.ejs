@@ -1,0 +1,49 @@
+<html>
+
+    <%- include("./partials/head.ejs") %>
+
+    <body class="">
+
+        <%- include("./partials/nav.ejs") %>
+
+        <div class="container d-flex flex-column">
+            <h4 class="t-form-title">Budgets</h4>
+
+            <ul class="b-list">
+                <% if(budgets){ %>
+                    <% budgets.forEach( function(budget) { %>
+                        <%- include("./partials/budget-li.ejs", {budget: budget}) %>
+                    <% } )  %>
+                <% } %>
+            </ul>
+
+            <form method="POST" action="/budgets" class="t-form">
+                <h6>Add Budget:</h6>
+
+                <div class="t-form-input">
+                    <label>Amount:</label>
+                    <input type="number" id="limit" name="limit" required>
+                </div>
+
+                <div class="t-form-input">
+                    <label>Category:</label>
+                    <input list="categories" id="category" name="category" required>
+                    <datalist id="categories">
+                        <option value="Groceries"></option>
+                        <option value="Food"></option>
+                        <option value="Car"></option>
+                        <option value="Home/Residence"></option>
+                        <option value="Entertainment"></option>
+                        <option value="Shopping"></option>
+                        <option value="Health"></option>
+                        <option value="Gift"></option>
+                    </datalist>
+                </div>
+
+                <button type="submit" class="btn bg-color-primary submit-hover">Add Budget</button>
+            </form>
+        </div>
+
+    </body>
+
+</html>

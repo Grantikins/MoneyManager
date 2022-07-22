@@ -2,30 +2,83 @@
 
     <%- include("./partials/head.ejs") %>
 
-    <body class="container">
+    <body class="">
 
         <%- include("./partials/nav.ejs") %>
 
         <div class="container">
-            <div class="row">
-                <div id="expenditure-per-week" class="col"></div>
-                <div id="category-expenditure" class="col"></div>
+
+            <div class="container">
+                <div class="row">
+                    <div id="expenditure-per-week" class="col"></div>
+                    <div id="category-expenditure" class="col"></div>
+                </div>
             </div>
+    
+            <%  transactions = transactions.sort( (a, b) => { 
+                    if(a.dateCreated > b.dateCreated)
+                        return -1
+                    else return 1 
+                })
+            %>
+    
+            <div class="up-recent-lists">
+                <ul class="list-group half-list">
+                    <li class="list-group-item bg-color-primary t-title"> <h5>Upcoming Transactions</h5> <a href="/transactions" class="view-transactions">View</a> </li>
+                    <% if(transactions) { %>
+                        <% var upcoming = transactions.filter( (t) => t.dateCreated > Date.now()) %>
+                        <% upcoming.sort() %>
+                        <% if(upcoming.length > 0){ %>
+                            <% for(var i = 0; i < 5; i++) { %>
+                                <%- include("./partials/transaction-li.ejs", {amount: upcoming[i].amount, category: upcoming[i].category, date: upcoming[i].dateCreated, id: upcoming[i].id}) %>
+                            <% } %>
+                        <% } else{ %>
+                            <p class="no-transaction-style"> You have no upcoming transactions. </p>
+                        <% } %>
+                    <% } %>
+                </ul>
+            
+                <ul class="list-group half-list">
+                    <li class="list-group-item bg-color-primary t-title"> <h5>Recent Transactions</h5> <a href="/transactions" class="view-transactions">View</a></li>
+                    <% if(transactions.length > 0) { %>
+                        <% var recent = transactions.filter( (t) => t.dateCreated <= Date.now() ) %>
+                        <% if(recent.length > 0){ %>
+                            <% if(recent.length < 5) {recentNum = recent.length} else recentNum = 5  %>
+                            <% for(var i = 0; i < recentNum; i++) { %>
+                                <%- include("./partials/transaction-li.ejs", {amount: recent[i].amount, category: recent[i].category, date: recent[i].dateCreated, id: recent[i].id}) %>
+                            <% } %>
+                        <% } %>
+                    <% } else{ %>
+                        <p class="no-transaction-style"> You have no recent transactions. </p>
+                    <% } %>
+                </ul>
+            </div>
+    
+            <div class="all-list">
+                <ul class="list-group full-list"> 
+                    <li class="list-group-item bg-color-primary t-title"> <h5>All Transactions</h5> <a href="/transactions" class="view-transactions">View</a> </li>
+                    <% if(transactions.length > 0) { %>
+                        <% if(transactions.length < 10) {tNum = transactions.length} else tNum = 10  %>
+                        <% for(var i = 0; i < tNum; i++){ %>
+                            <%- include("./partials/transaction-li.ejs", {amount: transactions[i].amount, category: transactions[i].category, date: transactions[i].dateCreated, id: transactions[i].id}) %>
+                        <% } %>
+                    <% } else{ %>
+                        <p class="no-transaction-style"> You have no transactions. </p>
+                    <% } %>
+                </ul>
+            </div>
+
         </div>
 
-        <ul class="list-group">
-            <li class="list-group-item">some transaction</li>
-            <li class="list-group-item">some transaction</li>
-            <li class="list-group-item">some transaction</li>
-            <li class="list-group-item">some transaction</li>
-        </ul>
+        <% var tJSON = JSON.stringify(transactions) %>
 
-        <button class="btn btn-success">Add transaction</button>
-
-        <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
-        </form>
+        <script type="text/javascript"> 
+            var tString = `<%= tJSON %>`
+            tString = tString.replaceAll("&#34;", `"`)
+            const transactionData = JSON.parse(tString) 
+        </script>
+        <script src="../scripts/bar.js"></script>
+        <script src="../scripts/pie.js"></script>
     </body>
 
-    <script src="../scripts/index.js"></script>
 </html>

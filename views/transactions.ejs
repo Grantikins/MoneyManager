@@ -1,0 +1,32 @@
+<html>
+
+    <%- include("./partials/head.ejs") %>
+
+    <body class="">
+
+        <%- include("./partials/nav.ejs") %>
+
+        <div class="container">
+            
+            <%  transactions = transactions.sort( (a, b) => { 
+                    if(a.dateCreated > b.dateCreated)
+                        return -1
+                    else return 1 
+                })
+            %>
+
+            <div class="all-list t-page">
+                <ul class="list-group full-list"> 
+                    <% if(transactions) { %>
+                        <% transactions.forEach(function(transaction) { %>
+                            <%- include("./partials/transaction-li.ejs", {amount: transaction.amount, category: transaction.category, date: transaction.dateCreated, id: transaction.id}) %>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

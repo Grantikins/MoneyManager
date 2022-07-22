@@ -1,0 +1,11 @@
+<li class="b-li">
+
+    <h6> <a href="/<%=budget.id%>" class="view-payment-a"> <%= budget.category %> Budget </a> </h6> <!-- Make delete button work -->
+    <%
+        var percent = budget.currentAmount / budget.budgetLimit * 100
+    %>
+    <div class="budget">
+        <div class="progress-bar" data-label="<%=budget.currentAmount%> / <%=budget.budgetLimit%>" style="--width: <%=percent%>" id="p"></div>
+    </div>
+
+</li>
