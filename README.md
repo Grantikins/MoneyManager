@@ -4,9 +4,9 @@ This project is a full stack web app that is designed to help users manage money
 
 TO RUN:  
 CD to the correct directory  
-Make a directory named "data" using mkdir data  
+Make a directory named "data" using command: mkdir data  
 type command: mongod --dbpath data/ --port 27017 --bind_ip '127.0.0.1'  
 open second terminal, cd to directory  
-type npm start  
+type command: npm start  
 
 Then use your web browser and go to localhost:3000
