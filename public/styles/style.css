@@ -213,6 +213,13 @@
     margin-top: 1em;
 }
 
+.no-transaction-style-big{
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    margin: 4em;
+}
+
 .budget{
     display: flex;
 }
@@ -223,4 +230,9 @@
 
 .individual-budget{
     margin-top: 40px;
+}
+
+.no-budget-style{
+    font-size: 1.5em;
+    margin-top: 1em;
 }

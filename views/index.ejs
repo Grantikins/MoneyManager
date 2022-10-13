@@ -9,10 +9,14 @@
         <div class="container">
 
             <div class="container">
-                <div class="row">
-                    <div id="expenditure-per-week" class="col"></div>
-                    <div id="category-expenditure" class="col"></div>
-                </div>
+                <% if(transactions.length === 0){ %>
+                    <p class="no-transaction-style-big">You have no transactions. Try adding some.</p>
+                <% } else{ %>
+                    <div class="row">
+                        <div id="expenditure-per-week" class="col"></div>
+                        <div id="category-expenditure" class="col"></div>
+                    </div>
+                <% } %>
             </div>
     
             <%  transactions = transactions.sort( (a, b) => { 
